@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS orders (
+    id SERIAL PRIMARY KEY,
+    status VARCHAR(20), 
+    user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE
+);
