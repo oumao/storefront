@@ -6,8 +6,10 @@
   "scripts": {
     "start": "node src/server.ts",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
-    "test": "npm run build && jasmine",
-    "build": "npx tsc",
+    "test": "db-migrate --env test up && yarn build && jasmine && db-migrate reset --env test",
+    "create-test-db": "db-migrate --config database.json db:create storefront_test",
+    "build": "yarn clean && npx tsc",
+    "clean": "rimraf dist",
     "prettier": "prettier --config .prettierrc \"src/**/*.ts\" --write",
     "lint": "eslint . --ext .ts --fix"
   },
