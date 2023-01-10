@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "start": "node src/server.ts",
+    "start": "yarn build && nodemon dist/server.js",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
     "test": "db-migrate --env test up && yarn build && jasmine && db-migrate reset --env test",
     "create-test-db": "db-migrate --config database.json db:create storefront_test",
@@ -30,6 +30,7 @@
     "@types/bcrypt": "^5.0.0",
     "@types/express": "^4.17.9",
     "@types/jasmine": "^3.6.3",
+    "@types/jsonwebtoken": "^9.0.0",
     "@types/pg": "^7.14.7",
     "@typescript-eslint/eslint-plugin": "^5.48.0",
     "@typescript-eslint/parser": "^5.48.0",
