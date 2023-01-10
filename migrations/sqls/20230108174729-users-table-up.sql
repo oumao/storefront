@@ -4,4 +4,5 @@ CREATE TABLE IF NOT EXISTS users (
     firstName VARCHAR(155) NOT NULL,
     lastName VARCHAR(155) NOT NULL,
     password_digest CHAR(60)
-);
+);   
+   
