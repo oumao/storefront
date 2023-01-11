@@ -8,6 +8,8 @@ export type Order = {
 
 
 export class OrderModel {
+
+    // Create an Order
     async create(o: Order): Promise<Order> {
         try {
             const conn = await client.connect()
@@ -24,6 +26,8 @@ export class OrderModel {
         }
     }
 
+
+    // Get list of Orders
     async getAllOrders(): Promise<Order []> {
         try {
             const conn = await client.connect()
@@ -40,22 +44,7 @@ export class OrderModel {
         }
     }
 
-    async updateSingleOrder(id: number, ): Promise<Order> {
-        try {
-            const conn = await client.connect()
-
-            const sql = `UPDATE orders SET status=$2 WHERE id=$1`
-
-            const result = await conn.query(sql, [id])
-
-            conn.release()
-
-            return result.rows[0]
-        } catch (error) {
-            throw new Error(`Couldnot create order. Error ${error}`)
-        }
-    }
-
+    // Get Single specific Order
     async getSingleOrder(id: number): Promise<Order> {
         try {
             const conn = await client.connect()
@@ -68,7 +57,43 @@ export class OrderModel {
 
             return result.rows[0]
         } catch (error) {
-            throw new Error(`Couldnot create order. Error ${error}`)
+            throw new Error(`Couldnot retrieve the order ${id}. Error ${error}`)
         }
     }
+
+    // Update Order Method
+    async updateSingleOrder(o: Order): Promise<Order> {
+        try {
+            const conn = await client.connect()
+
+            const sql = `UPDATE orders SET status=$2 WHERE id=$1 RETURNING *`
+
+            const result = await conn.query(sql, [o.id, o.status])
+
+            conn.release()
+
+            return result.rows[0]
+        } catch (error) {
+            throw new Error(`Couldnot update the order. Error ${error}`)
+        }
+    }
+
+    // Delete Order method
+    async deleteSingleOrder(id: number): Promise<Order> {
+        try {
+            const conn = await client.connect()
+
+            const sql = `DELETE FROM orders WHERE id=$1`
+
+            const result = await conn.query(sql, [id])
+
+            conn.release()
+
+            return result.rows[0]
+        } catch (error) {
+            throw new Error(`Couldnot delete the order ${id}. Error ${error}`)
+        }
+    }
+
+    
 }
