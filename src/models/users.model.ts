@@ -88,7 +88,7 @@ export class UserModel {
         try {
             const conn = await client.connect()
             const sql = `UPDATE users SET username=$2, firstName=$3, lastName=$4, password_digest=$5 WHERE id=$1 RETURNING *`
-
+            u.password_digest = bcrypt.hashSync(u.password_digest+BCRYPT_SECRET, parseInt(SALT_ROUNDS as string))
             const result = await conn.query(sql, [u.id, u.username, u.firstName, u.lastName, u.password_digest])
             conn.release()
 
