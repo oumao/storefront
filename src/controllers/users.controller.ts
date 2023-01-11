@@ -88,8 +88,9 @@ const editUser = async (_req: Request, res: Response) => {
 
             // update user
             const result = await userStore.updateUser(userObject)
+
     
-            res.status(200).json(result.username)
+            res.status(200).json(result)
         }
         
     } catch (error) {
