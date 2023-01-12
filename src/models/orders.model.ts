@@ -1,4 +1,5 @@
 import client from "../database/database"
+import { OrderProduct } from "../types/order.products.types"
 
 export type Order = {
     id?: number,
@@ -26,6 +27,22 @@ export class OrderModel {
         }
     }
 
+    // Create an Order with Products
+    async createOrderWithProducts(po: OrderProduct): Promise<OrderProduct> {
+        try {
+            const conn = await client.connect()
+
+            const sql = `INSERT INTO order_products (quantity, order_id, product_id) VALUES($1, $2, $3) RETURNING *`
+
+            const result = await conn.query(sql, [po.quantity, po.order_id, po.product_id])
+
+            conn.release()
+
+            return result.rows[0]
+        } catch (error) {
+            throw new Error(`Couldnot create products in an order. Error ${error}`)
+        }
+    }
 
     // Get list of Orders
     async getAllOrders(): Promise<Order []> {
@@ -66,9 +83,9 @@ export class OrderModel {
         try {
             const conn = await client.connect()
 
-            const sql = `UPDATE orders SET status=$2 WHERE id=$1 RETURNING *`
+            const sql = `UPDATE orders SET user_id=$2, status=$3 WHERE id=$1 RETURNING *`
 
-            const result = await conn.query(sql, [o.id, o.status])
+            const result = await conn.query(sql, [o.id, o.user_id, o.status])
 
             conn.release()
 
