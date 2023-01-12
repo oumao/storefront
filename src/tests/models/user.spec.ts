@@ -13,6 +13,7 @@ describe("User Model", () => {
         })
 
         expect(result.id).toBe(1)
+        expect(result.username).toBe("test_john")
     })
 
 
