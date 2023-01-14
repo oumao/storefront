@@ -1,66 +1,90 @@
-import { OrderModel } from "../../models/orders.model"
+import { Order, OrderModel } from '../../models/orders.model'
+import { ProductModel } from '../../models/products.model'
+import { UserModel } from '../../models/users.model'
+import exec from 'child_process'
 
 const orderStore = new OrderModel()
+const productStore = new ProductModel()
+const userStore = new UserModel()
 
-xdescribe("Order Model Suite", () => {
-
-    it("Should create an order", async () =>{
-        const order = {
-            user_id: 2,
-            status: "NEW"
-        }
-
-        const result = await orderStore.create(order)
-
-        expect(result.id).toBe(1)
-        expect(result.status).toBe("NEW")
-        expect(result.user_id).toBe(2)
+describe('Order Model Suite', () => {
+  beforeAll(async () => {
+    await productStore.create({
+      name: 'Sonytech',
+      price: 200.0,
     })
 
-    it("Should return list of orders", async () =>{
-        const result = await orderStore.getAllOrders()
-
-        expect(result[0].id).toBe(1)
-        expect(result[0].user_id).toBe(2)
+    await userStore.createUser({
+      username: 'test_john',
+      firstName: 'John',
+      lastName: 'Doe',
+      password_digest: 'password123',
     })
+  })
 
-    it("Should return an order", async () =>{
-        const result = await orderStore.getSingleOrder(1)
-
-        expect(result.id).toBe(1)
-        expect(result.status).toBe("NEW")
-        expect(result.user_id).toBe(2)
+  afterAll((done) => {
+    exec.exec(`db-migrate --env test reset`, (err, stdout, stderr) => {
+      if (err) {
+        console.error(err)
+        return
+      }
+      console.log(stdout)
+      done()
     })
+  })
 
-    it("Should update an order", async () =>{
-        const orders = await orderStore.getAllOrders()
+  it('Should create an order', async () => {
+    const order = {
+      user_id: 1,
+      status: 'ACTIVE',
+    }
 
-        const orderId = orders[0].id as unknown as number
+    const result = await orderStore.create(order)
 
-        const order = {
-            id: orderId,
-            user_id: 2,
-            status: "COMPLETED"
-        }
+    expect(result[0].id).toBe(1)
+    expect(result[0].status).toBe('ACTIVE')
+  })
 
-        const result = await orderStore.create(order)
+  it('Should return list of orders', async () => {
+    const result: Order[] = await orderStore.getAllOrders()
 
-        expect(result.id).toBe(1)
-        expect(result.status).toBe("COMPLETED")
-        expect(result.user_id).toBe(2)
-    })
+    expect(result[0].id).toBe(1)
+    expect(result[0].status).toBe('ACTIVE')
+  })
 
-    it("Should delete an order", async () =>{
-        let orders = await orderStore.getAllOrders()
+  it('Should return an order', async () => {
+    const result = await orderStore.getSingleOrder(1)
 
-        const orderId = orders[0].id as unknown as number
+    expect(result.id).toBe(1)
+    expect(result.status).toBe('ACTIVE')
+  })
 
-        const result = await orderStore.deleteSingleOrder(orderId)
+  it('Should update an order', async () => {
+    const orders = await orderStore.getAllOrders()
 
-        orders = await orderStore.getAllOrders()
+    const orderId = orders[0].id
 
-        expect(orders.length).toBe(0)
+    const order = {
+      id: orderId as number,
+      user_id: 1,
+      status: 'COMPLETED',
+    }
 
-    })
+    const result = await orderStore.updateSingleOrder(order)
 
+    expect(result.id).toBe(1)
+    expect(result.status).toBe('COMPLETED')
+  })
+
+  it('Should delete an order', async () => {
+    let orders = await orderStore.getAllOrders()
+
+    const orderId = orders[0].id as unknown as number
+
+    const result = await orderStore.deleteSingleOrder(orderId)
+
+    orders = await orderStore.getAllOrders()
+
+    expect(orders.length).toBe(0)
+  })
 })
