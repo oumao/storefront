@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "start-prod": "yarn build && nodemon dist/server.js",
-    "start-dev": "nodemon src/server.ts",
+    "start:prod": "yarn build && nodemon dist/server.js",
+    "start:dev": "nodemon src/server.ts",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
     "test": "db-migrate --env test up  && yarn build && jasmine &&  db-migrate reset --env test",
     "create-test-db": "db-migrate --config database.json db:create storefront_test",
