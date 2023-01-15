@@ -76,6 +76,19 @@ describe('Order Model Suite', () => {
     expect(result.status).toBe('COMPLETED')
   })
 
+  it('Should add product to an Order', async () => {
+    const ord = {
+      quantity: 2,
+      order_id: 1,
+      product_id: 1
+    }
+    const result = await orderStore.createOrderWithProducts(ord)
+
+    expect(result.quantity).toBe(2)
+    expect(parseInt(result.order_id as unknown as string)).toBe(1)
+    expect(parseInt(result.product_id as unknown as string)).toBe(1)
+  })
+
   it('Should delete an order', async () => {
     let orders = await orderStore.getAllOrders()
 
