@@ -7,17 +7,18 @@ import {
   updateOrder,
   deleteOrder,
 } from '../controllers/orders.controller'
+import { verifyToken } from '../middlewares/verifyToken.middlewares'
 
 const orderRoutes: Router = express.Router()
 
-orderRoutes.route('/orders').get(getOrders).post(createOrder)
+orderRoutes.route('/orders').get(getOrders, verifyToken).post(createOrder, verifyToken)
 orderRoutes
   .route('/orders/:id')
-  .get(getOrder)
-  .put(updateOrder)
-  .delete(deleteOrder)
+  .get(getOrder, verifyToken)
+  .put(updateOrder, verifyToken)
+  .delete(deleteOrder, verifyToken)
 orderRoutes
   .route('/orders/:orderId/products/:productId')
-  .post(createProductOrder)
+  .post(createProductOrder, verifyToken)
 
 export default orderRoutes

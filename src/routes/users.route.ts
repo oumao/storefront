@@ -6,10 +6,11 @@ import {
   editUser,
   removeUser,
 } from '../controllers/users.controller'
+import { verifyToken } from '../middlewares/verifyToken.middlewares'
 
 const userRoutes: Router = express.Router()
 
-userRoutes.route('/users').get(getUsers).post(registerUser)
-userRoutes.route('/users/:id').get(getUser).put(editUser).delete(removeUser)
+userRoutes.route('/users').get(getUsers, verifyToken).post(registerUser, verifyToken)
+userRoutes.route('/users/:id').get(getUser, verifyToken).put(editUser, verifyToken).delete(removeUser, verifyToken)
 
 export default userRoutes
