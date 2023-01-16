@@ -30,12 +30,7 @@ const registerUser = async (_req: Request, res: Response) => {
     } else {
       const user = await userStore.createUser(userObject)
 
-      const token = jwt.sign(
-        { id: user.id, username: user.username },
-        TOKEN_SECRET as string
-      )
-
-      res.status(201).json(token)
+      res.status(201).json(user)
     }
   } catch (error) {
     res.json(error)
