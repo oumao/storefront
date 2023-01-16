@@ -10,7 +10,7 @@ import { verifyToken } from '../middlewares/verifyToken.middlewares'
 
 const userRoutes: Router = express.Router()
 
-userRoutes.route('/users').get(getUsers, verifyToken).post(registerUser, verifyToken)
-userRoutes.route('/users/:id').get(getUser, verifyToken).put(editUser, verifyToken).delete(removeUser, verifyToken)
+userRoutes.route('/users').get(verifyToken, getUsers).post(verifyToken, registerUser)
+userRoutes.route('/users/:id').get(verifyToken, getUser).put(verifyToken, editUser).delete(verifyToken, removeUser)
 
 export default userRoutes

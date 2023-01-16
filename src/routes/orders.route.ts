@@ -11,14 +11,14 @@ import { verifyToken } from '../middlewares/verifyToken.middlewares'
 
 const orderRoutes: Router = express.Router()
 
-orderRoutes.route('/orders').get(getOrders, verifyToken).post(createOrder, verifyToken)
+orderRoutes.route('/orders').get(verifyToken, getOrders).post(verifyToken, createOrder)
 orderRoutes
   .route('/orders/:id')
-  .get(getOrder, verifyToken)
-  .put(updateOrder, verifyToken)
-  .delete(deleteOrder, verifyToken)
+  .get(verifyToken, getOrder)
+  .put(verifyToken, updateOrder)
+  .delete(verifyToken, deleteOrder)
 orderRoutes
   .route('/orders/:orderId/products/:productId')
-  .post(createProductOrder, verifyToken)
+  .post(verifyToken, createProductOrder)
 
 export default orderRoutes

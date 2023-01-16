@@ -9,9 +9,9 @@ import { verifyToken } from '../middlewares/verifyToken.middlewares'
 
 const dashboardRoutes = express.Router()
 
-dashboardRoutes.route('/dashboard/user-order').get(getUserOrder, verifyToken)
-dashboardRoutes.route('/dashboard/users-orders').get(getUsersOrders, verifyToken)
-dashboardRoutes.route('/cart/:orderId').get(getProductsOrder, verifyToken)
-dashboardRoutes.route('/users/:userId/checkout/:orderId').put(checkoutOrder, verifyToken)
+dashboardRoutes.route('/dashboard/user-order').get(verifyToken, getUserOrder)
+dashboardRoutes.route('/dashboard/users-orders').get(verifyToken, getUsersOrders)
+dashboardRoutes.route('/cart/:orderId').get(verifyToken, getProductsOrder)
+dashboardRoutes.route('/users/:userId/checkout/:orderId').put(verifyToken, checkoutOrder)
 
 export default dashboardRoutes

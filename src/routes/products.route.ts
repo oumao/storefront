@@ -10,11 +10,11 @@ import { verifyToken } from '../middlewares/verifyToken.middlewares'
 
 const productRoutes: Router = express.Router()
 
-productRoutes.route('/products').get(getProducts, verifyToken).post(createProduct, verifyToken)
+productRoutes.route('/products').get(verifyToken, getProducts).post(verifyToken, createProduct)
 productRoutes
   .route('/products/:id')
-  .get(getProduct, verifyToken)
-  .put(updateProduct, verifyToken)
-  .delete(deleteProduct, verifyToken)
+  .get(verifyToken, getProduct)
+  .put(verifyToken, updateProduct)
+  .delete(verifyToken, deleteProduct)
 
 export default productRoutes
