@@ -77,7 +77,7 @@ export class UserModel {
       const sql = `SELECT id, username, firstName, lastName FROM users`
 
       const result = await conn.query(sql)
-
+  
       conn.release()
 
       return result.rows
