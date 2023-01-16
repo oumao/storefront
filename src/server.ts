@@ -8,7 +8,7 @@ const address = '0.0.0.0:3000' as string
 app.use(bodyParser.json())
 
 // Routes
-app.use('/', apiRoutes)
+app.use('/api', apiRoutes)
 
 app.listen(3000, function () {
   console.log(`starting app on: ${address}`)
