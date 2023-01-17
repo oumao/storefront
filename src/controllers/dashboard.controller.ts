@@ -8,7 +8,7 @@ const orderStore = new OrderModel()
 export const getUserOrder = async (_req: Request, res: Response) => {
   try {
     const userId = _req.params.user_id
-    const result = await dashboard.getUserWithOrder(userId)
+    const result = await dashboard.getUserWithOrder(userId as unknown as number)
 
     if (!result) {
       res.status(404).json(`No user with id ${userId}`)
