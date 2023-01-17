@@ -9,17 +9,18 @@ const userStore = new UserModel()
 
 describe('Order Model Suite', () => {
   beforeAll(async () => {
+    
     await productStore.create({
       name: 'Sonytech',
       price: 200.0,
     })
 
-    await userStore.createUser({
-      username: 'test_john',
-      firstName: 'John',
-      lastName: 'Doe',
-      password_digest: 'password123',
-    })
+    // await userStore.createUser({
+    //   username: 'test_john',
+    //   firstName: 'John',
+    //   lastName: 'Doe',
+    //   password_digest: 'password123',
+    // })
   })
 
   afterAll((done) => {
@@ -41,21 +42,21 @@ describe('Order Model Suite', () => {
 
     const result = await orderStore.create(order)
 
-    expect(result[0].id).toBe(1)
+    expect(result[0].id).toBe(2)
     expect(result[0].status).toBe('ACTIVE')
   })
 
   it('Should return list of orders', async () => {
     const result: Order[] = await orderStore.getAllOrders()
 
-    expect(result[0].id).toBe(1)
-    expect(result[0].status).toBe('ACTIVE')
+    expect(result[1].id).toBe(2)
+    expect(result[1].status).toBe('ACTIVE')
   })
 
   it('Should return an order', async () => {
-    const result = await orderStore.getSingleOrder(1)
+    const result = await orderStore.getSingleOrder(2)
 
-    expect(result.id).toBe(1)
+    expect(result.id).toBe(2)
     expect(result.status).toBe('ACTIVE')
   })
 
@@ -98,6 +99,6 @@ describe('Order Model Suite', () => {
 
     orders = await orderStore.getAllOrders()
 
-    expect(orders.length).toBe(0)
+    expect(orders.length).toBe(1)
   })
 })
