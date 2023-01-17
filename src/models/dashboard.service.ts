@@ -2,7 +2,7 @@ import client from '../database/database'
 
 export class DashboardQueries {
   async getUserWithOrder(
-    user_id: string
+    user_id: number
   ): Promise<
     { firstName: string; lastName: string; id: number; status: string }[]
   > {
