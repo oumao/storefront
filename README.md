@@ -2,7 +2,14 @@
 
 ## Getting Started
     1. Clone this repo and run `yarn` in your terminal at the project root.
-    2. 
+    2. Ensure you either have `docker` installed in your machine or a local instance of `postgres` installed in your machine.
+    3. For `DOCKER` there is a `docker-compose.yml` file at the root of the project. Navigate to the project's directory and run `docker compose up -d` to run your docker instance.
+    4. Use `docker compose ps` to check if the instance is running before connecting to it. You can proceed to login to it using `psql -U postgres -W mypassword-as-set-in-.env-file`
+    5. For `postgres local instance`, first check if the service is running either from the services window [windows os] or `systemctl status postgresql`
+    6. To run migrations and create db. First run `yarn create-dev-db` to create the db and `yarn migrate-dev-db` to create migrations.
+    7. Change the `ENV` variable to `test` in the `.env` file and run `yarn test` to run tests.
+    8. Change the `ENV` variable to `dev` in the `.env` file and run `yarn start:dev` for development purposes and `yarn start:prod` for production.
+
 ## Required Technologies
 - Postgres for the database
 - Node/Express for the application logic
