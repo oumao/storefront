@@ -1,11 +1,9 @@
-# Storefront Backend Project
+# Storefront Backend
 
 ## Getting Started
-
-This repo contains a basic Node and Express app to get you started in constructing an API. To get started, clone this repo and run `yarn` in your terminal at the project root.
-
+    1. Clone this repo and run `yarn` in your terminal at the project root.
+    2. 
 ## Required Technologies
-Your application must make use of the following libraries:
 - Postgres for the database
 - Node/Express for the application logic
 - dotenv from npm for managing environment variables
@@ -13,7 +11,50 @@ Your application must make use of the following libraries:
 - jsonwebtoken from npm for working with JWTs
 - jasmine from npm for testing
 
-## Steps to Completion
+## Storefront Endpoints
+
+### Users 
+
+| Method | Endpoint | Description | Response |
+--- | --- | --- | --- | 
+GET | /api/users | Retrieve list of users | 200 OK
+POST | /api/users | Register a user | 201 OK
+GET | /api/users/1 | Retrieve a single user | 200 OK
+UPDATE | /api/users/1 | Update a user | 201 OK
+DELETE | /api/users/1 | Delete a user | 200 OK
+
+### Orders 
+
+| Method | Endpoint | Description | Response |
+--- | --- | --- | --- | 
+GET | /api/orders | Retrieve list of orders | 200 OK
+POST | /api/orders | Register an order | 201 OK
+GET | /api/orders/1 | Retrieve a single order | 200 OK
+UPDATE | /api/orders/1 | Update an order | 201 OK
+DELETE | /api/orders/1 | Delete an order | 200 OK
+
+
+### Products 
+
+| Method | Endpoint | Description | Response |
+--- | --- | --- | --- | 
+GET | /api/products | Retrieve list of products | 200 OK
+POST | /api/products | Register a product | 201 OK
+GET | /api/products/1 | Retrieve a single product | 200 OK
+UPDATE | /api/products/1 | Update a product | 201 OK
+DELETE | /api/products/1 | Delete a product | 200 OK
+
+
+### Dashboard 
+
+| Method | Endpoint | Description | Response |
+--- | --- | --- | --- | 
+GET | /api/dashboard/user-order | Retrieve a user with specific order | 200 OK
+GET | /api/dashboard/users-orders | Retrieve list of all orders placed | 200 OK
+GET | /api/cart/1 | Retrieve a specific order in cart | 200 OK
+UPDATE | /api/users/1/checkout/1 | Checkout an order | 201 OK
+
+ 
 
 ### 1. Plan to Meet Requirements
 
