@@ -9,6 +9,8 @@
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
     "test": "db-migrate --env test up  && yarn build && jasmine &&  db-migrate reset --env test",
     "create-test-db": "db-migrate --config database.json db:create storefront_test",
+    "create-dev-db": "db-migrate --config database.json db:create storefront",
+    "migrate-dev-db": "db-migrate --env dev up",
     "build": "yarn clean && npx tsc",
     "clean": "rimraf dist",
     "prettier": "prettier --config .prettierrc \"src/**/*.ts\" --write",
