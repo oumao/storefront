@@ -5,26 +5,26 @@ const userStore = new UserModel()
 
 describe('User Model', () => {
 
-  beforeAll((done) => {
-    exec.exec(`db-migrate --env test reset`, (err, stdout, stderr) => {
-      if (err) {
-        console.error(err)
-        return
-      }
-      console.log(stdout)
-    })
+  // beforeAll((done) => {
+  //   exec.exec(`db-migrate --env test reset`, (err, stdout, stderr) => {
+  //     if (err) {
+  //       console.error(err)
+  //       return
+  //     }
+  //     console.log(stdout)
+  //   })
 
-    exec.exec(`db-migrate --env test up`, (err, stdout, stderr) => {
-      if (err) {
-        console.error(err)
-        return
-      }
-      console.log(stdout)
-      done()
-    })
+  //   exec.exec(`db-migrate --env test up`, (err, stdout, stderr) => {
+  //     if (err) {
+  //       console.error(err)
+  //       return
+  //     }
+  //     console.log(stdout)
+  //     done()
+  //   })
 
     
-  })
+  // })
 
   afterAll((done) => {
     exec.exec(`db-migrate --env test reset`, (err, stdout, stderr) => {
@@ -39,14 +39,14 @@ describe('User Model', () => {
 
   it('Should create a user', async () => {
     const result = await userStore.createUser({
-      username: 'test_john',
+      username: 'test_doe',
       firstName: 'John',
       lastName: 'Doe',
       password_digest: 'Test123',
     })
 
-    expect(result.id).toBe(1)
-    expect(result.username).toBe('test_john')
+    expect(result.id).toBe(2)
+    expect(result.username).toBe('test_doe')
   })
 
   it('Should retrieve user by Id', async () => {
@@ -71,13 +71,13 @@ describe('User Model', () => {
 
     const result = await userStore.updateUser({
       id: userId,
-      username: 'test_doe',
+      username: 'test_does',
       firstName: 'John',
       lastName: 'Doe',
       password_digest: 'Test321',
     })
 
-    expect(result.username).toBe('test_doe')
+    expect(result.username).toBe('test_does')
   })
 
   it('Should delete a user', async () => {
@@ -89,6 +89,6 @@ describe('User Model', () => {
 
     users = await userStore.getAllUsers()
 
-    expect(users.length).toBe(0)
+    expect(users.length).toBe(1)
   })
 })

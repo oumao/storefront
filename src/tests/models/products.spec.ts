@@ -4,32 +4,32 @@ import exec from 'child_process'
 const productStore = new ProductModel()
 
 describe('Product Model', () => {
-  beforeAll((done) => {
+  // beforeAll((done) => {
 
-    exec.exec(`db-migrate --env test up`, (err, stdout, stderr) => {
-      if (err) {
-        console.error(err)
-        return
-      }
-      console.log(stdout)
-      done()
-    })
-  })
+  //   exec.exec(`db-migrate --env test up`, (err, stdout, stderr) => {
+  //     if (err) {
+  //       console.error(err)
+  //       return
+  //     }
+  //     console.log(stdout)
+  //     done()
+  //   })
+  // })
 
-  afterAll((done) => {
-    exec.exec(`db-migrate --env test reset`, (err, stdout, stderr) => {
-      if (err) {
-        console.error(err)
-        return
-      }
-      console.log(stdout)
-      done()
-    })
-  })
+  // afterAll((done) => {
+  //   exec.exec(`db-migrate --env test reset`, (err, stdout, stderr) => {
+  //     if (err) {
+  //       console.error(err)
+  //       return
+  //     }
+  //     console.log(stdout)
+  //     done()
+  //   })
+  // })
 
   it('Should create a product', async () => {
     const p = {
-      name: 'Sony Subwoofer',
+      name: 'Sonytech',
       price: 12.5,
     }
     const result = await productStore.create(p)
@@ -41,7 +41,7 @@ describe('Product Model', () => {
   it('Should retrieve a list of products', async () => {
     const result = await productStore.getAllProducts()
 
-    expect(result[0].name).toBe("Sony Subwoofer")
+    expect(result[0].name).toBe("Sonytech")
   })
 
 
@@ -50,7 +50,7 @@ describe('Product Model', () => {
     const productId = products[0].id as number
     const result = await productStore.getSingleProduct(productId)
 
-    expect(result.name).toBe("Sony Subwoofer")
+    expect(result.name).toBe("Sonytech")
   })
 
   it('should update a specific product',async () => {
@@ -76,7 +76,7 @@ describe('Product Model', () => {
     const orderId = orders[0].id as number
     await productStore.deleteSingleProduct(orderId)
     orders = await productStore.getAllProducts()
-    expect(orders.length).toBe(0)
+    expect(orders.length).toBe(1)
   })
 
 

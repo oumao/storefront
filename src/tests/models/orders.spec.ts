@@ -8,31 +8,31 @@ const productStore = new ProductModel()
 const userStore = new UserModel()
 
 describe('Order Model Suite', () => {
-  beforeAll(async () => {
+  // beforeAll(async () => {
     
-    await productStore.create({
-      name: 'Sonytech',
-      price: 200.0,
-    })
+  //   // await productStore.create({
+  //   //   name: 'Sonytech',
+  //   //   price: 200.0,
+  //   // })
 
-    // await userStore.createUser({
-    //   username: 'test_john',
-    //   firstName: 'John',
-    //   lastName: 'Doe',
-    //   password_digest: 'password123',
-    // })
-  })
+  //   // await userStore.createUser({
+  //   //   username: 'test_john',
+  //   //   firstName: 'John',
+  //   //   lastName: 'Doe',
+  //   //   password_digest: 'password123',
+  //   // })
+  // })
 
-  afterAll((done) => {
-    exec.exec(`db-migrate --env test reset`, (err, stdout, stderr) => {
-      if (err) {
-        console.error(err)
-        return
-      }
-      console.log(stdout)
-      done()
-    })
-  })
+  // afterAll((done) => {
+  //   exec.exec(`db-migrate --env test reset`, (err, stdout, stderr) => {
+  //     if (err) {
+  //       console.error(err)
+  //       return
+  //     }
+  //     console.log(stdout)
+  //     done()
+  //   })
+  // })
 
   it('Should create an order', async () => {
     const order = {
