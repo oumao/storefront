@@ -10,10 +10,10 @@ import { verifyToken } from '../middlewares/verifyToken.middlewares'
 
 const productRoutes: Router = express.Router()
 
-productRoutes.route('/products').get(verifyToken, getProducts).post(verifyToken, createProduct)
+productRoutes.route('/products').get(getProducts).post(verifyToken, createProduct)
 productRoutes
   .route('/products/:id')
-  .get(verifyToken, getProduct)
+  .get(getProduct)
   .put(verifyToken, updateProduct)
   .delete(verifyToken, deleteProduct)
 
