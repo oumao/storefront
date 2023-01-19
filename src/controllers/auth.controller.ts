@@ -15,7 +15,7 @@ export const userSignIn = async (_req: Request, res: Response) => {
 
         if(!user) throw new Error(`User not Found`)
         
-        const isPasswordMatch = await bcrypt.compare(
+        const isPasswordMatch = await bcrypt.compareSync(
             password_digest + process.env.BCRYPT_SECRET as string, 
             user.password_digest
         )
