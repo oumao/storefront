@@ -1,31 +1,9 @@
 import { Product, ProductModel } from '../../models/products.model'
-import exec from 'child_process'
 
 const productStore = new ProductModel()
 
 describe('Product Model', () => {
-  // beforeAll((done) => {
 
-  //   exec.exec(`db-migrate --env test up`, (err, stdout, stderr) => {
-  //     if (err) {
-  //       console.error(err)
-  //       return
-  //     }
-  //     console.log(stdout)
-  //     done()
-  //   })
-  // })
-
-  // afterAll((done) => {
-  //   exec.exec(`db-migrate --env test reset`, (err, stdout, stderr) => {
-  //     if (err) {
-  //       console.error(err)
-  //       return
-  //     }
-  //     console.log(stdout)
-  //     done()
-  //   })
-  // })
 
   it('Should create a product', async () => {
     const p = {
