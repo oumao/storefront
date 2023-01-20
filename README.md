@@ -29,6 +29,8 @@ POST | /api/users | Register a user | 201 OK
 GET | /api/users/1 | Retrieve a single user | 200 OK
 UPDATE | /api/users/1 | Update a user | 201 OK
 DELETE | /api/users/1 | Delete a user | 200 OK
+GET | /api/users/invalid | Validate invalid user | 400 BAD REQUEST
+GET | /api/users/100 | Validate if user exists | 404 NOT FOUND
 
 ### Orders 
 
@@ -39,6 +41,8 @@ POST | /api/orders | Register an order | 201 OK
 GET | /api/orders/1 | Retrieve a single order | 200 OK
 UPDATE | /api/orders/1 | Update an order | 201 OK
 DELETE | /api/orders/1 | Delete an order | 200 OK
+GET | /api/orders/invalid | Validate invalid order id | 400 BAD REQUEST
+GET | /api/orders/100 | Validate if order exists | 404 NOT FOUND
 
 
 ### Products 
@@ -50,6 +54,8 @@ POST | /api/products | Register a product | 201 OK
 GET | /api/products/1 | Retrieve a single product | 200 OK
 UPDATE | /api/products/1 | Update a product | 201 OK
 DELETE | /api/products/1 | Delete a product | 200 OK
+GET | /api/products/invalid | Validate invalid product id | 400 BAD REQUEST
+GET | /api/products/100 | Validate if product exists | 404 NOT FOUND
 
 
 ### Dashboard 
