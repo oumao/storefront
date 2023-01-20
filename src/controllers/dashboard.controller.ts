@@ -7,7 +7,7 @@ const orderStore = new OrderModel()
 
 export const getUserOrder = async (_req: Request, res: Response) => {
   try {
-    const userId = _req.params.user_id
+    const userId = _req.params.userId
     const result = await dashboard.getUserWithOrder(userId as unknown as number)
 
     if (!result) {
