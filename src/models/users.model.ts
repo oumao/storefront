@@ -20,12 +20,6 @@ export class UserModel {
       const conn = await client.connect()
       const sql = `INSERT INTO users (username, firstName, lastName, password_digest) VALUES($1, $2, $3, $4) RETURNING *`
 
-      // Generating hashed password using bcrypt
-      // u.password_digest = bcrypt.hashSync(
-      //   u.password_digest + BCRYPT_SECRET,
-      //   parseInt(SALT_ROUNDS as string)
-      // )
-
       const result = await conn.query(sql, [
         u.username,
         u.firstName,
