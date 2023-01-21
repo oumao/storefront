@@ -5,19 +5,24 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## API Endpoints
 #### Products
-- Index 
-- Show
-- Create [token required]
+- Index - `([GET] /api/products)`
+- Show -` ([GET] /api/products/1)`
+- Create [token required] - `([POST] /api/products)`
+- Update [token required] - `([PUT] /api/products/1)`
+- Delete [token required] - `([DELETE] /api/products/1)`
 - [OPTIONAL] Top 5 most popular products 
 - [OPTIONAL] Products by category (args: product category)
 
 #### Users
-- Index [token required]
-- Show [token required]
-- Create N[token required]
+- Index [token required] - `([GET] /api/users)`
+- Show [token required] - `([GET] /api/users/1)`
+- Update [token required] - `([PUT] /api/users/1)`
+- Delete [token required] - `([DELETE] /api/users/1)`
+- Create N[token required] - `([POST] /api/users)`
 
 #### Orders
-- Current Order by user (args: user id)[token required]
+- Current Order by user (args: user id)[token required] - `([GET] /api/dashboard/user-order/1)`
+- Checkout an order- `([PUT] /api/users/1/checkout/1)`
 - [OPTIONAL] Completed Orders by user (args: user id)[token required]
 
 ## Data Shapes
@@ -27,11 +32,31 @@ These are the notes from a meeting with the frontend developer that describe wha
 - price
 - [OPTIONAL] category
 
+```
+CREATE TABLE IF NOT EXISTS products(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(155) NOT NULL,
+    price NUMERIC NOT NULL
+);
+```
+
+
 #### User
 - id
 - firstName
 - lastName
 - password
+- 
+
+```
+CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    firstName VARCHAR(155) NOT NULL,
+    lastName VARCHAR(155) NOT NULL,
+    password_digest CHAR(60)
+);  
+```
 
 #### Orders
 - id
@@ -39,4 +64,22 @@ These are the notes from a meeting with the frontend developer that describe wha
 - quantity of each product in the order
 - user_id
 - status of order (active or complete)
+
+```
+CREATE TABLE IF NOT EXISTS orders (
+    id SERIAL PRIMARY KEY,
+    status VARCHAR(20), 
+    user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+CREATE TABLE IF NOT EXISTS order_products(
+    id SERIAL PRIMARY KEY,
+    quantity INTEGER,
+    order_id  BIGINT NOT NULL REFERENCES orders(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    product_id BIGINT NOT NULL REFERENCES products(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+```
+
+
 
