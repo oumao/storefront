@@ -18,9 +18,14 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Show [token required] - `([GET] /api/users/1)`
 - Update [token required] - `([PUT] /api/users/1)`
 - Delete [token required] - `([DELETE] /api/users/1)`
-- Create N[token required] - `([POST] /api/users)`
+- Create [token required] - `([POST] /api/users)`
 
 #### Orders
+- Index [token required] - `([GET] /api/orders)`
+- Show [token required] - `([GET] /api/orders/1)`
+- Update [token required] - `([PUT] /api/orders/1)`
+- Delete [token required] - `([DELETE] /api/orders/1)`
+- Create [token required] - `([POST] /api/orders)`
 - Current Order by user (args: user id)[token required] - `([GET] /api/dashboard/user-order/1)`
 - Checkout an order- `([PUT] /api/users/1/checkout/1)`
 - [OPTIONAL] Completed Orders by user (args: user id)[token required]
