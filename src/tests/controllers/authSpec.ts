@@ -23,7 +23,8 @@ describe("Authentication Suite", () => {
                         lastName: "Doe"
                     })
                     .expect(200)
-            
+
+          
             expect(response.body.username).toEqual("testUser")
             expect(response.body.firstname).toEqual("John")
         })

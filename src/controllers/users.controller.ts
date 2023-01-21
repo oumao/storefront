@@ -1,5 +1,4 @@
-import express, { Request, Response } from 'express'
-import jwt from 'jsonwebtoken'
+import { Request, Response } from 'express'
 import dotenv from 'dotenv'
 import { User, UserModel } from '../models/users.model'
 
@@ -7,9 +6,6 @@ dotenv.config()
 
 // Instantiating user model
 const userStore = new UserModel()
-
-// Environment variables
-const { TOKEN_SECRET } = process.env
 
 // Controller to create user
 const registerUser = async (_req: Request, res: Response) => {
@@ -56,7 +52,10 @@ const getUser = async (_req: Request, res: Response) => {
     if (!user) {
       res.status(404).json(`No user with id ${userId} found!`)
     }
-    res.status(200).json(user)
+
+    res.status(200).json({
+     user
+    })
   } catch (error) {
     res.status(400).json(error)
   }
@@ -82,7 +81,7 @@ const editUser = async (_req: Request, res: Response) => {
 
       // update user
       const result = await userStore.updateUser(userObject)
-
+      console.log(result)
       res.status(200).json(result)
     }
   } catch (error) {
@@ -103,7 +102,7 @@ const removeUser = async (_req: Request, res: Response) => {
       // delete user from the database
       await userStore.deleteUser(userId)
 
-      res.send(200).json(`User successfully deleted`)
+      res.status(200).json(`User successfully deleted`)
     }
   } catch (error) {
     res.status(400).json('Couldnot delete User ')

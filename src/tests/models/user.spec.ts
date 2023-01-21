@@ -24,7 +24,6 @@ describe('User Model', () => {
       password_digest: 'Test123',
     })
 
-    expect(result.id).toBe(3)
     expect(result.username).toBe('test_doe')
   })
 

@@ -53,6 +53,12 @@ export const userSignUp = async (_req: Request, res: Response) => {
     try {
         const user = _req.body as unknown as User
 
+        // Check to see if the user is already registered
+        const existingUser = await userStore.getUserByUsername(user.username)
+
+        if(existingUser) throw new Error(`User already exists`)
+
+
         // Hashing password before saving to the db
         user.password_digest = await bcrypt.hashSync(
             user.password_digest + process.env.BCRYPT_SECRET as string, 
