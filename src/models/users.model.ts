@@ -18,7 +18,7 @@ export class UserModel {
   async createUser(u: User): Promise<User> {
     try {
       const conn = await client.connect()
-      const sql = `INSERT INTO users (username, firstName, lastName, password_digest) VALUES($1, $2, $3, $4) RETURNING *`
+      const sql = `INSERT INTO users (username, firstName, lastName, password_digest) VALUES($1, $2, $3, $4) RETURNING username, firstName, lastName`
 
       const result = await conn.query(sql, [
         u.username,
@@ -38,7 +38,7 @@ export class UserModel {
   async getUserById(id: number): Promise<User> {
     try {
       const conn = await client.connect()
-      const sql = `SELECT * FROM users WHERE id=$1`
+      const sql = `SELECT id, username, firstName, lastName FROM users WHERE id=$1`
 
       const result = await conn.query(sql, [id])
 
@@ -83,7 +83,7 @@ export class UserModel {
   async updateUser(u: User): Promise<User> {
     try {
       const conn = await client.connect()
-      const sql = `UPDATE users SET username=$2, firstName=$3, lastName=$4, password_digest=$5 WHERE id=$1 RETURNING *`
+      const sql = `UPDATE users SET username=$2, firstName=$3, lastName=$4, password_digest=$5 WHERE id=$1 RETURNING username, firstName, lastName`
       u.password_digest = bcrypt.hashSync(
         u.password_digest + BCRYPT_SECRET,
         parseInt(SALT_ROUNDS as string)
