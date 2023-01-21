@@ -6,13 +6,18 @@ const userStore = new UserModel()
 
 export const verifyToken =async (_req: Request, res: Response, next: NextFunction) => {
     try {
+
+        // Access the token from headers
         const authToken = _req.headers.authorization?.split(" ")[1]
 
         if(!authToken) throw new Error("Token Missing!")
+
+        // Verify the validity of the token
         const decodeToken = jwt.verify(authToken, process.env.TOKEN_SECRET as string)
 
         if(!decodeToken) throw new Error("Invalid token")
 
+        // Get the user using the decoded token
         const user = await userStore.getUserByUsername((decodeToken as any).username)
         if(!user) throw new Error("Invalid token")
 
