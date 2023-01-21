@@ -7,7 +7,10 @@ const orderStore = new OrderModel()
 
 export const getUserOrder = async (_req: Request, res: Response) => {
   try {
+    // Pick userId from params
     const userId = _req.params.userId
+
+    // Retrieve orders using the userId
     const result = await dashboard.getUserWithOrder(userId as unknown as number)
 
     if (!result) {
@@ -21,6 +24,7 @@ export const getUserOrder = async (_req: Request, res: Response) => {
 
 export const getUsersOrders = async (_req: Request, res: Response) => {
   try {
+    // Retrieving active orders
     const result = await dashboard.getUsersWithOrders()
     res.status(200).json(result)
   } catch (error) {
@@ -30,6 +34,7 @@ export const getUsersOrders = async (_req: Request, res: Response) => {
 
 export const getProductsOrders = async (_req: Request, res: Response) => {
   try {
+    // Retrieving products added to orders
     const result = await dashboard.getProductsInOrders()
     res.status(200).json(result)
   } catch (error) {
@@ -60,9 +65,14 @@ export const checkoutOrder = async (_req: Request, res: Response) => {
 
     const orderExist = await orderStore.getSingleOrder(orderId)
 
+    //Check if an order exists
     if (orderExist) {
+
+      // Confirm the status before processing
       if (orderExist.status === 'ACTIVE') {
         orderExist.status = 'COMPLETE'
+
+        // Checking out the order
         const result = await dashboard.checkOutOrder(
           orderId,
           userId,
