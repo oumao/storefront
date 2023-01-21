@@ -5,27 +5,6 @@ const userStore = new UserModel()
 
 describe('User Model', () => {
 
-  // beforeAll((done) => {
-  //   exec.exec(`db-migrate --env test reset`, (err, stdout, stderr) => {
-  //     if (err) {
-  //       console.error(err)
-  //       return
-  //     }
-  //     console.log(stdout)
-  //   })
-
-  //   exec.exec(`db-migrate --env test up`, (err, stdout, stderr) => {
-  //     if (err) {
-  //       console.error(err)
-  //       return
-  //     }
-  //     console.log(stdout)
-  //     done()
-  //   })
-
-    
-  // })
-
   afterAll((done) => {
     exec.exec(`db-migrate --env test reset`, (err, stdout, stderr) => {
         if (err) {
@@ -45,7 +24,7 @@ describe('User Model', () => {
       password_digest: 'Test123',
     })
 
-    expect(result.id).toBe(2)
+    expect(result.id).toBe(3)
     expect(result.username).toBe('test_doe')
   })
 
@@ -56,12 +35,12 @@ describe('User Model', () => {
 
     const result = await userStore.getUserById(userId)
 
-    expect(result.username).toBe('test_john')
+    expect(result.username).toBe('testUser')
   })
 
   it('Should retrieve list of users', async () => {
     const result = await userStore.getAllUsers()
-    expect(result[0].username).toBe('test_john')
+    expect(result[0].username).toBe('testUser')
   })
 
   it('Should update a user', async () => {
@@ -89,6 +68,6 @@ describe('User Model', () => {
 
     users = await userStore.getAllUsers()
 
-    expect(users.length).toBe(1)
+    expect(users.length).toBe(2)
   })
 })

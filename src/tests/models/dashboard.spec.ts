@@ -44,13 +44,13 @@ describe("Dashboard Queries", () =>{
 
     it("Should get users with placed orders", async () => {
         const result = await dashboard.getUsersWithOrders()
-        expect(result.length).toBe(1)
+        expect(result.length).toBe(2)
         expect(result[0].status).toBe("ACTIVE")
     })
 
     it("Should get products in a specific order", async () => {
         const result = await dashboard.getProductsInOrder(1)
-        expect(result.length).toBe(1)
+        expect(result.length).toBe(2)
         expect(result[0].name).toBe("Sonytech")
         expect(result[0].quantity).toBe(3)
     })

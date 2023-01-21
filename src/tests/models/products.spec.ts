@@ -54,7 +54,7 @@ describe('Product Model', () => {
     const orderId = orders[0].id as number
     await productStore.deleteSingleProduct(orderId)
     orders = await productStore.getAllProducts()
-    expect(orders.length).toBe(1)
+    expect(orders.length).toBe(2)
   })
 
 

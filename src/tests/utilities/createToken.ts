@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 
+dotenv.config()
+
 const { TOKEN_SECRET } = process.env
 
 export const createToken = (id: number, username: string): string => {
