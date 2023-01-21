@@ -2,6 +2,8 @@
 <p>
 Storefront backend restful api that facilitates creationg of orders, products and users. User can order for a product and completed the purchase through various endpoints.
 </p>
+
+
 ## Getting Started
 1. Clone this repo and run `yarn` in your terminal at the project root.
 2. Ensure you either have `docker` installed in your machine or a local instance of `postgres` installed in your machine.
